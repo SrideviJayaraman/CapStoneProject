@@ -115,8 +115,3 @@ resource "aws_instance" "CAPSTONE" {
     Name = "HelloWorld"
   }
 }
-
-output "private_ip" {
-  value = aws_instance.CAPSTONE.private_ip
-  file = "./private_ip.txt"
-}
