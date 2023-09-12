@@ -99,7 +99,7 @@ resource "aws_security_group" "CAPSTONE" {
     Name = "allow_tls"
   }
 }
-resource "aws_key_pair" "CAPSTONE" {
+resource "aws_key_pair" "CAPSTONE-KP" {
   key_name   = "CAPSTONE-KP" 
   public_key = "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQC9AGgJBb/Z3Ll89GoPoG1QVh9tDbvuLa1PjUiYuPvbYVY5/BPp/ROkWcrwG4HpEzRMgb3UfV3N53upteRwbhZSsDvoI85eu/t9s7Yl+dyQZUadhDYoPMf2Dfu/UDPbAQdvV2D40vRsTlgXB6TxODsv5ebt6NfwUwb8DIqE9yo6renx7QJzDtR42zFws03oiGgD4R0HSX6jAoCjKNNwIOch13RDh10RftBI7lvKJB/j6VMVBkXW6m97J1R8ZEUZKtxfZpJ8fg9Y602agrnt9UviC7JJCL8dJmySfrBIY4JHFlhZmSidpFSgyE0AnAD25/4q77FlsSCtIrbjOEmsbOSt suru@suru"
 }
