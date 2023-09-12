@@ -47,16 +47,11 @@ resource "aws_internet_gateway" "sri-gw" {
   vpc_id = aws_vpc.sri-vpc.id
 }
 
-resource "aws_internet_gateway_attachment" "sri-gw" {
-  internet_gateway_id = aws_internet_gateway.sri-gw.id
-  vpc_id              = aws_vpc.sri-vpc.id
-}
-
 resource "aws_route_table_association" "rt-igw" {
   gateway_id     = aws_internet_gateway.sri-gw.id
   route_table_id = aws_route_table.PUBLIC-RT.id
 }
- resource "aws_eip" "sri-eip" {
+resource "aws_eip" "sri-eip" {
   domain   = "vpc"
 }
 
@@ -67,6 +62,5 @@ resource "aws_nat_gateway" "sri-ngw" {
 
 resource "aws_route" "PRIVATE-RT-NGW" {
   route_table_id         = aws_route_table.PRIVATE-RT.id
-  destination_cidr_block = "0.0.0.0/0"
   nat_gateway_id         = aws_nat_gateway.sri-ngw.id
 }
