@@ -30,7 +30,6 @@ resource "aws_route_table" "PRIVATE-RT" {
 
 resource "aws_route_table_association" "PUBLIC-RT1" {
   subnet_id      = aws_subnet.sub1_pub.id
-  subnet_id      = aws_subnet.sub2_pub.id
   route_table_id = aws_route_table.PUBLIC-RT.id
 }
 
