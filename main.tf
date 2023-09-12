@@ -1,30 +1,18 @@
-resource "aws_vpc" "main" {
+resource "aws_vpc" "sri_vpc" {
   cidr_block = "10.0.0.0/16"
 }
 
-resource "aws_subnet" "main" {
-  vpc_id     = aws_vpc.main.id
+resource "aws_subnet" "sub1(pub)" {
+  vpc_id     = aws_vpc.sri_vpc.id
   cidr_block = "10.0.1.0/24"
-
-  tags = {
-    Name = "Sub1"
-  }
 }
 
-resource "aws_subnet" "main" {
-  vpc_id     = aws_vpc.main.id
-  cidr_block = "10.0.0.0/25"
-
-  tags = {
-    Name = "Sub2"
-  }
+resource "aws_subnet" "sub2(pub)" {
+  vpc_id     = aws_vpc.sri_vpc.id
+  cidr_block = "10.0.2.0/24"
 }
 
-resource "aws_subnet" "main" {
-  vpc_id     = aws_vpc.main.id
-  cidr_block = "10.0.0.128/25"
-
-  tags = {
-    Name = "Sub3"
-  }
+resource "aws_subnet" "sub3(priv)" {
+  vpc_id     = aws_vpc.sri_vpc.id
+  cidr_block = "10.0.3.0/24"
 }
