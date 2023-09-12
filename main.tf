@@ -47,7 +47,7 @@ resource "aws_internet_gateway" "sri-gw" {
   vpc_id = aws_vpc.sri-vpc.id
 }
 
-resource "aws_internet_gateway_attachment" "sri-gw-attach" {
+resource "aws_internet_gateway_attachment" "sri-gw" {
   internet_gateway_id = aws_internet_gateway.sri-gw.id
   vpc_id              = aws_vpc.sri-vpc.id
 }
