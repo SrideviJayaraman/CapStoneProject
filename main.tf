@@ -55,6 +55,7 @@ resource "aws_nat_gateway" "CAPSTONE" {
 }
 resource "aws_route" "ATTACH" {
   route_table_id = aws_route_table.PRIVATE.id
+  destination_cidr_block    = "10.0.0.0/16"
   nat_gateway_id = aws_nat_gateway.CAPSTONE.id
 }
 resource "aws_security_group" "CAPSTONE" {
@@ -98,10 +99,10 @@ resource "aws_security_group" "CAPSTONE" {
     Name = "allow_tls"
   }
 }
-resource "aws_key_pair" "CAPSTONE-KP" {
+resource "aws_key_pair" "CAPSTONE" {
   key_name = "CAPSTONE.pem"
 }
-resource "aws_instance" "CAPSTONE-PROJECT" {
+resource "aws_instance" "CAPSTONE" {
   ami           = ami-053b0d53c279acc90
   instance_type = "t2.micro"
   vpc_security_group_ids = aws_security_group.CAPSTONE.id
