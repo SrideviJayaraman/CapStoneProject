@@ -1,6 +1,6 @@
 # vpc
 resource "aws_vpc" "sri_vpc" {
-  cidr_block = var.vpc_cidr
+  cidr_block = "10.0.0.0/16"
   tags = {
     Name = "sri-terr-vpc"
   }
@@ -8,8 +8,8 @@ resource "aws_vpc" "sri_vpc" {
 # subnet 1 (public)
 resource "aws_subnet" "sri_subnet1" {
   vpc_id = aws_vpc.sri_vpc.id
-  cidr_block = var.subnet1_cidr
-  availability_zone_id = var.subnet1_availability_zone
+  cidr_block = "10.0.1.0/24"
+  availability_zone_id = "us-east-1a"
   map_public_ip_on_launch = true
   tags = {
     Name = "Terr-subnet1"
@@ -18,8 +18,8 @@ resource "aws_subnet" "sri_subnet1" {
 
 resource "aws_subnet" "sri_subnet2" {
   vpc_id = aws_vpc.sri_vpc.id
-  cidr_block = var.subnet2_cidr
-  availability_zone_id = var.subnet2_availability_zone
+  cidr_block = "10.0.2.0/24"
+  availability_zone_id = "us-east-1b"
   map_public_ip_on_launch = true
   tags = {
     Name = "Terr-subnet2"
@@ -28,8 +28,8 @@ resource "aws_subnet" "sri_subnet2" {
 # subnet 2(public) change it to private
 resource "aws_subnet" "sri_subnet3" {
   vpc_id = aws_vpc.sri_vpc.id
-  cidr_block = var.subnet3_cidr
-  availability_zone_id = var.subnet3_availability_zone
+  cidr_block = "10.0.3.0/24"
+  availability_zone_id = "us-east-1c"
   map_public_ip_on_launch = false
   tags = {
     Name = "Terr-subnet3"
@@ -56,6 +56,9 @@ resource "aws_route_table" "sri_rt_public" {
 #route table 2 
 resource "aws_route_table" "sri_rt_private" {
   vpc_id = aws_vpc.sri_vpc.id
+  route {
+    cidr_block = "0.0.0.0/0"
+  }
   tags = {
     Name = "Terr-rt2"
   }
@@ -93,7 +96,7 @@ resource "aws_nat_gateway" "sri_nat_gateway" {
 
 # Elastic IP for NAT Gateway
 resource "aws_eip" "sri_eip" {
-  vpc = true
+  domain = "vpc"
 }
 
 # Modify the route table associated with your private subnet to route traffic through the NAT Gateway
@@ -141,8 +144,8 @@ resource "aws_security_group" "sri_sg" {
 
 # Create EC2 instances
 resource "aws_instance" "web_server1" {
-  ami           = var.ami_id 
-  instance_type = var.instance_type     
+  ami           = "ami-053b0d53c279acc90"
+  instance_type = "t2.micro"   
   subnet_id     = aws_subnet.sri_subnet1.id
   key_name      = "ssh-terraform-key"
   security_groups = [aws_security_group.sri_sg.id]
@@ -151,8 +154,8 @@ resource "aws_instance" "web_server1" {
   }
 }
 resource "aws_instance" "web_server2" {
-  ami           = var.ami_id 
-  instance_type = var.instance_type     
+  ami           = "ami-053b0d53c279acc90"
+  instance_type = "t2.micro"    
   subnet_id     = aws_subnet.sri_subnet2.id
   key_name      = "ssh-terraform-key"
   security_groups = [aws_security_group.sri_sg.id]
