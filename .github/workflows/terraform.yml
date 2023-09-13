@@ -63,5 +63,6 @@ jobs:
       run: terraform apply -input=false -auto-approve
 
     - name: Terraform Destroy
-    
-      run: terraform destroy
+  
+      run: terraform destroy -auto-approve 
+       if: failure()
