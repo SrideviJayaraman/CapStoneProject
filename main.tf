@@ -9,7 +9,7 @@ resource "aws_vpc" "sri_vpc" {
 resource "aws_subnet" "sri_subnet1" {
   vpc_id = aws_vpc.sri_vpc.id
   cidr_block = "10.0.1.0/24"
-  availability_zone_id = "us-east-1a"
+  availability_zone_id = "use1-az1"
   map_public_ip_on_launch = true
   tags = {
     Name = "Terr-subnet1"
@@ -19,7 +19,7 @@ resource "aws_subnet" "sri_subnet1" {
 resource "aws_subnet" "sri_subnet2" {
   vpc_id = aws_vpc.sri_vpc.id
   cidr_block = "10.0.2.0/24"
-  availability_zone_id = "us-east-1b"
+  availability_zone_id = "use1-az2"
   map_public_ip_on_launch = true
   tags = {
     Name = "Terr-subnet2"
@@ -29,7 +29,7 @@ resource "aws_subnet" "sri_subnet2" {
 resource "aws_subnet" "sri_subnet3" {
   vpc_id = aws_vpc.sri_vpc.id
   cidr_block = "10.0.3.0/24"
-  availability_zone_id = "us-east-1c"
+  availability_zone_id = "use1-az3"
   map_public_ip_on_launch = false
   tags = {
     Name = "Terr-subnet3"
