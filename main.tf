@@ -201,6 +201,7 @@ resource "aws_lb" "terr_classic_lb" {
   name               = "my-classic-lb"
   internal           = false
   enable_deletion_protection = false 
+  subnets = [aws_subnet.sri_subnet2.id, aws_subnet.sri_subnet1.id]
 }
 
 resource "aws_lb_listener" "terr_lb_listener" {
