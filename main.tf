@@ -207,6 +207,6 @@ resource "aws_lb" "terr_classic_lb" {
 }
 
 output "lb_dns_name" {
-  value = aws_lb.example_lb.dns_name
+  value = aws_lb.terr_classic_lb.dns_name
 }
 
