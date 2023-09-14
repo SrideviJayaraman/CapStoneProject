@@ -210,7 +210,7 @@ resource "aws_lb_listener" "terr_lb_listener" {
   
   default_action {
     type             = "forward"
-    target_group_arn = aws_lb_target_group.example_target_group.arn  # Replace with your target group ARN
+    target_group_arn = aws_lb_target_group.sri-lb-tg.arn
   }
 }
 
