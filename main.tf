@@ -196,11 +196,10 @@ resource "aws_lb_target_group_attachment" "sri-lb-tg" {
   port             = 80
 }
 
-#classic LB
+# Classic LB
 resource "aws_lb" "terr_classic_lb" {
   name               = "my-classic-lb"
   internal           = false
-  load_balancer_type = "classic"
   enable_deletion_protection = false 
 }
 
@@ -208,9 +207,14 @@ resource "aws_lb_listener" "terr_lb_listener" {
   load_balancer_arn = aws_lb.terr_classic_lb.arn
   port              = 80
   protocol          = "HTTP"
-  instance_port     = 80
-  instance_protocol = "HTTP"
+  
+  default_action {
+    type             = "fixed-response"
+    fixed_response_type = "content-type-text/plain"
+    fixed_response_content = "Hello, World!"
+  }
 }
+
 output "lb_dns_name" {
   value = aws_lb.terr_classic_lb.dns_name
 }
