@@ -56,9 +56,6 @@ resource "aws_route_table" "sri_rt_public" {
 #route table 2 
 resource "aws_route_table" "sri_rt_private" {
   vpc_id = aws_vpc.sri_vpc.id
-  route {
-    cidr_block = "0.0.0.0/0"
-  }
   tags = {
     Name = "Terr-rt2"
   }
