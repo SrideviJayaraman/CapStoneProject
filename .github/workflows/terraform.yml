@@ -65,4 +65,4 @@ jobs:
     - name: Terraform Destroy
       
       run: terraform destroy -auto-approve
-      if: failure()
+      if: failure() || success()
