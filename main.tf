@@ -207,8 +207,14 @@ resource "aws_lb_listener" "terr_lb_listener" {
   load_balancer_arn = aws_lb.terr_classic_lb.arn
   port              = 80
   protocol          = "HTTP"
+  
+  default_action {
+    type             = "forward"
+    target_group_arn = aws_lb_target_group.example_target_group.arn  # Replace with your target group ARN
+  }
 }
 
 output "lb_dns_name" {
   value = aws_lb.terr_classic_lb.dns_name
 }
+
