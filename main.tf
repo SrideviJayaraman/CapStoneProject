@@ -147,7 +147,7 @@ resource "aws_instance" "web_server1" {
   ami           = "ami-053b0d53c279acc90"
   instance_type = "t2.micro"   
   subnet_id     = aws_subnet.sri_subnet1.id
-  key_name      = "ssh-terraform-key"
+  key_name      = "new_kp"
   security_groups = [aws_security_group.sri_sg.id]
   tags = {
     Name = "webserver-public"
@@ -157,7 +157,7 @@ resource "aws_instance" "web_server2" {
   ami           = "ami-053b0d53c279acc90"
   instance_type = "t2.micro"    
   subnet_id     = aws_subnet.sri_subnet2.id
-  key_name      = "ssh-terraform-key"
+  key_name      = "new_kp"
   security_groups = [aws_security_group.sri_sg.id]
   tags = {
     Name = "webserver-private"
