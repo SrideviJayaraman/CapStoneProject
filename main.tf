@@ -131,6 +131,12 @@ resource "aws_security_group" "sri_sg" {
     protocol = "tcp"
     cidr_blocks = ["0.0.0.0/0"]
   }
+  ingress {
+    from_port = 5000
+    to_port = 5000
+    protocol = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
   egress {
     from_port = 0
     to_port = 0
@@ -196,16 +202,15 @@ resource "aws_lb" "terr_classic_lb" {
   internal           = false
   load_balancer_type = "classic"
   enable_deletion_protection = false 
-
-  # Listener block - configure listeners here
-  listener {
-    instance_port     = 80
-    instance_protocol = "HTTP"
-    lb_port           = 80
-    lb_protocol       = "HTTP"
-  }
 }
 
+resource "aws_lb_listener" "terr_lb_listener" {
+  load_balancer_arn = aws_lb.terr_classic_lb.arn
+  port              = 80
+  protocol          = "HTTP"
+  instance_port     = 80
+  instance_protocol = "HTTP"
+}
 output "lb_dns_name" {
   value = aws_lb.terr_classic_lb.dns_name
 }
