@@ -183,13 +183,9 @@ resource "aws_lb_target_group" "sri-lb-tg" {
 }
 
 resource "aws_lb_target_group_attachment" "sri-lb-tg" {
-  target_group_arn = aws_lb_target_group.lb_tg.arn
+  target_group_arn = aws_lb_target_group.sri-lb-tg.arn
   target_id        = aws_instance.web_server1
   port             = 80
-}
-
-output "target_group_arn" {
-  value = aws_lb_target_group.sri-lb-tg.arn
 }
 
 
