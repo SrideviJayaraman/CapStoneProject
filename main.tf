@@ -175,6 +175,7 @@ output "public_ip2" {
    value = aws_instance.web_server2.public_ip
 }
 
+#target groups
 resource "aws_lb_target_group" "sri-lb-tg" {
   name     = "tf-lb-tg"
   port     = 80
@@ -182,11 +183,30 @@ resource "aws_lb_target_group" "sri-lb-tg" {
   vpc_id   = aws_vpc.sri_vpc.id
 }
 
+#target groups attachment 
 resource "aws_lb_target_group_attachment" "sri-lb-tg" {
   target_group_arn = aws_lb_target_group.sri-lb-tg.arn
   target_id        = aws_instance.web_server1.id
   port             = 80
 }
 
+#classic LB
+resource "aws_lb" "terr_classic_lb" {
+  name               = "my-classic-lb"
+  internal           = false
+  load_balancer_type = "classic"
+  enable_deletion_protection = false 
 
+  # Listener block - configure listeners here
+  listener {
+    instance_port     = 80
+    instance_protocol = "HTTP"
+    lb_port           = 80
+    lb_protocol       = "HTTP"
+  }
+}
+
+output "lb_dns_name" {
+  value = aws_lb.example_lb.dns_name
+}
 
