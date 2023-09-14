@@ -174,3 +174,18 @@ output "private_ip2" {
 output "public_ip2" {
    value = aws_instance.web_server2.public_ip
 }
+
+resource "aws_lb_target_group" "sri-lb-tg" {
+  name     = "tf-lb-tg"
+  port     = 80
+  protocol = "HTTP"
+  vpc_id   = aws_vpc.sri_vpc.id
+}
+
+resource "aws_lb_target_group_attachment" "sri-lb-tg" {
+  target_group_arn = aws_lb_target_group.lb_tg.arn
+  target_id        = aws_instance.sri-lb-tg.id
+  port             = 80
+}
+
+
