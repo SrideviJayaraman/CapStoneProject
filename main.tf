@@ -207,12 +207,10 @@ resource "aws_lb_listener" "terr_lb_listener" {
   load_balancer_arn = aws_lb.terr_classic_lb.arn
   port              = 80
   protocol          = "HTTP"
-  
-  default_action {
-    type             = "fixed-response"
-    fixed_response_type = "content-type-text/plain"
-    fixed_response_content = "Hello, World!"
-  }
+}
+
+output "lb_dns_name" {
+  value = aws_lb.terr_classic_lb.dns_name
 }
 
 output "lb_dns_name" {
