@@ -188,4 +188,9 @@ resource "aws_lb_target_group_attachment" "sri-lb-tg" {
   port             = 80
 }
 
+output "target_group_arn" {
+  value = aws_lb_target_group.sri-lb-tg.arn
+}
+
+
 
