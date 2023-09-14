@@ -212,8 +212,3 @@ resource "aws_lb_listener" "terr_lb_listener" {
 output "lb_dns_name" {
   value = aws_lb.terr_classic_lb.dns_name
 }
-
-output "lb_dns_name" {
-  value = aws_lb.terr_classic_lb.dns_name
-}
-
